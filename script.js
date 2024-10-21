@@ -1,23 +1,20 @@
-function checkVowels() {
-    const inputText = document.getElementById('inputText').value.toLowerCase();
-    const vowels = ['a', 'e', 'i', 'o', 'u'];
-    const foundVowels = [];
-
-    for (let char of inputText) {
-        if (vowels.includes(char) && !foundVowels.includes(char)) {
-            foundVowels.push(char);
-        }
-    }
-
+document.getElementById('checkBtn').addEventListener('click', function() {
+    const letter = document.getElementById('letter').value.toLowerCase();
     const resultDiv = document.getElementById('result');
-    if (foundVowels.length > 0) {
-        resultDiv.innerHTML = `Found vowels: <strong>${foundVowels.join(', ')}</strong>`;
-    } else {
-        resultDiv.innerHTML = "No vowels found.";
-    }
-}
 
-function clearText() {
-    document.getElementById('inputText').value = '';
-    document.getElementById('result').innerHTML = '';
-}
+    if (letter.length !== 1 || !/^[a-zA-Z]$/.test(letter)) {
+        resultDiv.innerText = "Please enter a valid letter.";
+        resultDiv.style.color = "red";
+        return;
+    }
+
+    const vowels = ['a', 'e', 'i', 'o', 'u'];
+    
+    if (vowels.includes(letter)) {
+        resultDiv.innerText = `${letter.toUpperCase()} is a vowel.`;
+        resultDiv.style.color = "green";
+    } else {
+        resultDiv.innerText = `${letter.toUpperCase()} is a consonant.`;
+        resultDiv.style.color = "blue";
+    }
+});
